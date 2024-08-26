@@ -1,4 +1,5 @@
-body, html {
+/* Ensure the body takes full height and uses flexbox for layout */
+html, body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -6,8 +7,16 @@ body, html {
     overflow-x: hidden;
     font-family: Arial, sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: #111;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Main content wrapper */
+.main-content {
+    flex: 1; /* Allows the content area to expand and push footer to bottom */
+}
+
+/* Canvas Container */
 #canvas-container {
     position: fixed;
     top: 0;
@@ -17,103 +26,16 @@ body, html {
     z-index: 1;
 }
 
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgb(0, 0, 0);
-    padding: 10px;
-    text-align: center;
-    z-index: 2;
-    transition: top 0.3s;
-}
-
-.nav-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.nav-menu li {
-    margin: 0 20px;
-}
-
-.nav-links {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    position: relative;
-    display: inline-block;
-}
-
-.nav-links.active {
-    border-bottom: 2px solid #ffcc00; /* Indicate active link */
-}
-
-/* Mobile menu styles */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.menu-toggle .bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 4px 0;
-}
-
-@media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        background: rgb(0, 0, 0);
-        position: absolute;
-        top: 60px;
-        left: 0;
-        padding: 10px 0;
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .menu-toggle {
-        display: flex;
-        margin-left: auto;
-    }
-
-    .nav-menu li {
-        margin: 10px 0;
-    }
-
-    .nav-links {
-        font-size: 22px;
-        padding: 10px;
-        display: block;
-    }
-}
-
+/* Content Styles */
 .content {
     position: relative;
     z-index: 2;
     color: white;
     text-align: center;
     padding: 30px 20px;
-    margin-top: 60px;
 }
 
-section {
-    min-height: 80vh;
-    padding: 30px 0;
-}
-
+/* Home Section */
 .home-content {
     display: flex;
     flex-direction: column;
@@ -134,12 +56,62 @@ section {
     font-weight: bold;
 }
 
-h1 {
+#event-name {
     font-family: 'Orbitron', sans-serif;
     font-size: 5em;
     margin: 10px 0;
     color: #ffcc00;
     text-shadow: 0 0 20px #ffcc00, 0 0 30px #247681c2, 0 0 40px #bdb286;
+    line-height: 1.2; /* Ensure text does not overlap */
+}
+
+/* Existing CSS styles... */
+
+/* Glow Effect for Event Name */
+#home h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem; /* Adjust the base size */
+    color: #f5f5f5; /* Text color */
+    text-shadow: 
+        0 0 5px #ff0,   /* Yellow glow */
+        0 0 10px #ff0, 
+        0 0 15px #ff0, 
+        0 0 20px #ff0, 
+        0 0 25px #ff0; /* Larger and more intense glow */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 1024px) {
+    #home h1 {
+        font-size: 3rem; /* Adjust for tablets and small screens */
+    }
+}
+
+@media (max-width: 768px) {
+    #home h1 {
+        font-size: 2.5rem; /* Adjust for mobile screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #home h1 {
+        font-size: 2rem; /* Further adjust for very small screens */
+    }
+}
+
+
+@media (max-width: 768px) {
+    #event-name {
+        font-size: 4em; /* Adjust font size for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    #event-name {
+        font-size: 2em; 
+    }
 }
 
 .timer {
@@ -147,22 +119,45 @@ h1 {
     justify-content: center;
     gap: 20px;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .timer-block {
     background-color: rgba(131, 88, 95, 0.74);
-    padding: 20px;
+    padding: 10px;
     border-radius: 15px;
-    width: 100px;
+    width: 100px; 
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 5px;
 }
 
 .timer-block span {
     display: block;
-    font-size: 2.5em;
+    font-size: 2.5em; 
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .timer-block {
+        width: 80px; 
+        padding: 8px; 
+    }
+
+    .timer-block span {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .timer-block {
+        width: 60px;
+        padding: 5px;}
+
+    .timer-block span {
+        font-size: 1.5em;
+    }
 }
 
 .frame {
@@ -191,8 +186,22 @@ h1 {
     width: calc(33.333% - 20px);
     box-shadow: 0 0 10px rgba(107, 95, 95, 0.5);
     text-align: center;
+    box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+    .event-card {
+        width: calc(50% - 20px); /* Adjust width for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .event-card {
+        width: calc(100% - 20px); /* Full width for mobile */
+    }
+}
+
+/* Instructions Box */
 .instruction-container {
     display: flex;
     flex-wrap: wrap;
@@ -201,14 +210,28 @@ h1 {
     align-content: center;
 }
 
-.instruction {
+.instruction-box {
     background: rgba(195, 34, 201, 0.432);
     border-radius: 10px;
-    margin: auto;
     padding: 50px;
     width: 60%;
     box-shadow: 0 0 10px rgba(107, 95, 95, 0.5);
     text-align: center;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .instruction-box {
+        width: 80%; /* Adjust width for tablets */
+        padding: 30px; /* Adjust padding for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .instruction-box {
+        width: 90%; /* Adjust width for mobile */
+        padding: 10px; /* Adjust padding for mobile */
+    }
 }
 
 .register-container {
@@ -240,6 +263,7 @@ h1 {
     max-width: 600px;
     margin: 20px auto;
     text-align: center;
+    box-sizing: border-box;
 }
 
 footer {
@@ -248,15 +272,5 @@ footer {
     text-align: center;
     color: white;
     position: relative;
-    bottom: 0;
     width: 100%;
-}
-
-footer a {
-    color: #ffcc00;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }
